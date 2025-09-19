@@ -1,0 +1,195 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import 'tailwindcss';
+@import "tw-animate-css";
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-background: #ffffff;
+  --color-foreground: #1e293b;
+
+  --color-card: #ffffff;
+  --color-card-foreground: #1e293b;
+
+  --color-popover: #ffffff;
+  --color-popover-foreground: #1e293b;
+
+  --color-primary: #0f766e;
+  --color-primary-foreground: #ffffff;
+
+  --color-secondary: #f59e0b;
+  --color-secondary-foreground: #ffffff;
+
+  --color-muted: #fef3c7; /* A subtle amber background for muted elements */
+  --color-muted-foreground: #92400e; /* Darker amber for text on muted background */
+
+  --color-accent: #f59e0b;
+  --color-accent-foreground: #ffffff;
+
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #fafafa;
+
+  --color-border: #e2e8f0;
+  --color-input: #e2e8f0;
+  --color-ring: #0f766e;
+
+  --color-chart-1: #0f766e;
+  --color-chart-2: #f59e0b;
+  --color-chart-3: #64748b;
+  --color-chart-4: #475569;
+  --color-chart-5: #1e293b;
+
+  --color-neutral-slat-50: #f8fafc;
+  --color-neutral-slat-100: #f1f5f9;
+  --color-neutral-slat-200: #e2e8f0;
+  --color-neutral-slat-300: #cbd5e1;
+  --color-neutral-slat-400: #94a3b8;
+  --color-neutral-slat-500: #64748b;
+  --color-neutral-slat-600: #475569;
+  --color-neutral-slat-700: #334155;
+  --color-neutral-slat-800: #1e293b;
+  --color-neutral-slat-900: #0f172a;
+
+  --color-success: #22c55e;
+  --color-success-foreground: #ffffff;
+  --color-warning: #fbbf24;
+  --color-warning-foreground: #1e293b;
+  --color-info: #3b82f6;
+  --color-info-foreground: #ffffff;
+
+  --font-display: "Inter", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-heading: "Inter", sans-serif;
+
+  --radius-lg: 0.5rem;
+  --radius-md: calc(0.5rem - 2px);
+  --radius-sm: calc(0.5rem - 4px);
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: #e2e8f0;
+  }
+}
+
+@layer utilities {
+  body {
+    font-family: var(--font-body);
+  }
+}
+
+@layer base {
+  :root {
+    --background: var(--color-background);
+    --foreground: var(--color-foreground);
+    --card: var(--color-card);
+    --card-foreground: var(--color-card-foreground);
+    --popover: var(--color-popover);
+    --popover-foreground: var(--color-popover-foreground);
+    --primary: var(--color-primary);
+    --primary-foreground: var(--color-primary-foreground);
+    --secondary: var(--color-secondary);
+    --secondary-foreground: var(--color-secondary-foreground);
+    --muted: var(--color-muted);
+    --muted-foreground: var(--color-muted-foreground);
+    --accent: var(--color-accent);
+    --accent-foreground: var(--color-accent-foreground);
+    --destructive: var(--color-destructive);
+    --destructive-foreground: var(--color-destructive-foreground);
+    --border: var(--color-border);
+    --input: var(--color-input);
+    --ring: var(--color-ring);
+    --chart-1: var(--color-chart-1);
+    --chart-2: var(--color-chart-2);
+    --chart-3: var(--color-chart-3);
+    --chart-4: var(--color-chart-4);
+    --chart-5: var(--color-chart-5);
+    --radius: var(--radius-lg);
+  }
+
+  .dark {
+    --background: #0f172a;
+    --foreground: #e2e8f0;
+    --card: #0f172a;
+    --card-foreground: #e2e8f0;
+    --popover: #0f172a;
+    --popover-foreground: #e2e8f0;
+    --primary: #0f766e; /* Primary color remains the same in dark mode for brand consistency */
+    --primary-foreground: #ffffff;
+    --secondary: #f59e0b; /* Secondary color remains the same in dark mode */
+    --secondary-foreground: #ffffff;
+    --muted: #475569; /* Darker muted background */
+    --muted-foreground: #cbd5e1; /* Lighter text on muted background */
+    --accent: #f59e0b;
+    --accent-foreground: #ffffff;
+    --destructive: #dc2626;
+    --destructive-foreground: #fafafa;
+    --border: #475569;
+    --input: #475569;
+    --ring: #0f766e;
+    --chart-1: #0f766e;
+    --chart-2: #f59e0b;
+    --chart-3: #64748b;
+    --chart-4: #94a3b8;
+    --chart-5: #cbd5e1;
+  }
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+
+  a {
+    color: var(--primary);
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  p {
+    line-height: 1.6;
+  }
+}

@@ -1,0 +1,139 @@
+{
+  "name": "ai-loan-broker",
+  "version": "1.0.0",
+  "description": "AI-powered loan broker platform with ML-based risk assessment",
+  "scripts": {
+    "dev": "npm run env:check && next dev",
+    "build": "npm run env:check && npm run db:check && next build",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit",
+    
+    "env:check": "node scripts/check-env.js",
+    "env:setup": "node scripts/setup-env.js",
+    
+    "db:setup": "npm run db:generate && npm run db:push && npm run db:seed",
+    "db:generate": "drizzle-kit generate",
+    "db:push": "drizzle-kit push",
+    "db:migrate": "drizzle-kit migrate",
+    "db:studio": "drizzle-kit studio",
+    "db:check": "node scripts/check-db.js",
+    "db:reset": "node scripts/reset-db.js && npm run db:setup",
+    "db:backup": "node scripts/backup-db.js",
+    "db:restore": "node scripts/restore-db.js",
+    
+    "seed": "npm run seed:dev",
+    "seed:dev": "node scripts/seed-dev.js",
+    "seed:prod": "node scripts/seed-prod.js",
+    "seed:test": "node scripts/seed-test.js",
+    "seed:clear": "node scripts/clear-seeds.js",
+    
+    "ml:setup": "python scripts/setup-ml.py",
+    "ml:train": "python scripts/train-models.py",
+    "ml:train:risk": "python scripts/train-risk-model.py",
+    "ml:train:recommendation": "python scripts/train-recommendation-model.py",
+    "ml:evaluate": "python scripts/evaluate-models.py",
+    "ml:validate": "python scripts/validate-models.py",
+    "ml:deploy": "npm run ml:validate && node scripts/deploy-models.js",
+    "ml:retrain": "python scripts/retrain-models.py",
+    "ml:monitor": "python scripts/monitor-models.py",
+    
+    "test": "npm run test:unit && npm run test:integration",
+    "test:unit": "jest --testPathPattern=__tests__/unit",
+    "test:integration": "jest --testPathPattern=__tests__/integration",
+    "test:e2e": "playwright test",
+    "test:ml": "python -m pytest tests/ml/",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    
+    "docker:build": "docker build -t ai-loan-broker .",
+    "docker:run": "docker run -p 3000:3000 ai-loan-broker",
+    "docker:compose:up": "docker-compose up -d",
+    "docker:compose:down": "docker-compose down",
+    "docker:compose:logs": "docker-compose logs -f",
+    
+    "deploy:staging": "npm run build && npm run test && npm run deploy:staging:run",
+    "deploy:staging:run": "node scripts/deploy-staging.js",
+    "deploy:production": "npm run build && npm run test && npm run ml:validate && npm run deploy:production:run",
+    "deploy:production:run": "node scripts/deploy-production.js",
+    
+    "admin:create-user": "node scripts/admin/create-user.js",
+    "admin:backup": "node scripts/admin/backup.js",
+    "admin:migrate-data": "node scripts/admin/migrate-data.js",
+    "admin:cleanup": "node scripts/admin/cleanup.js",
+    
+    "monitor": "node scripts/monitor.js",
+    "logs": "node scripts/logs.js",
+    "health": "node scripts/health-check.js",
+    
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "security:audit": "npm audit && python scripts/security-audit.py",
+    "deps:update": "npm update && python -m pip install --upgrade -r requirements.txt",
+    "deps:check": "npm outdated && python scripts/check-python-deps.py",
+    
+    "clean": "rm -rf .next out dist node_modules/.cache",
+    "clean:all": "npm run clean && rm -rf node_modules && npm install",
+    "clean:ml": "python scripts/clean-ml-cache.py",
+    
+    "precommit": "npm run lint && npm run type-check && npm run test:unit",
+    "prepare": "husky install",
+    "postinstall": "npm run env:check",
+    
+    "data:export": "node scripts/data/export.js",
+    "data:import": "node scripts/data/import.js",
+    "data:anonymize": "node scripts/data/anonymize.js",
+    "data:validate": "node scripts/data/validate.js",
+    
+    "benchmark": "node scripts/benchmark.js",
+    "performance": "node scripts/performance-test.js"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/ai-loan-broker.git"
+  },
+  "keywords": [
+    "ai",
+    "machine-learning",
+    "loan-broker",
+    "fintech",
+    "risk-assessment",
+    "nextjs",
+    "typescript"
+  ],
+  "author": "Your Organization",
+  "license": "MIT",
+  "dependencies": {
+    "next": "^14.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "typescript": "^5.0.0",
+    "drizzle-orm": "^0.29.0",
+    "drizzle-kit": "^0.20.0",
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0"
+  },
+  "devDependencies": {
+    "jest": "^29.0.0",
+    "@playwright/test": "^1.40.0",
+    "prettier": "^3.0.0",
+    "eslint": "^8.0.0",
+    "eslint-config-next": "^14.0.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^15.0.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,yml,yaml}": [
+      "prettier --write"
+    ]
+  }
+}
